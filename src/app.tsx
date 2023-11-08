@@ -7,6 +7,7 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { RequestConfig } from '@@/plugin-request/request';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -16,6 +17,10 @@ export const initialStateConfig = {
   loading: <PageLoading />,
 };
 
+export const request: RequestConfig = {
+  prefix: '/api',
+  timeout: 10000,
+};
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
@@ -30,7 +35,7 @@ export async function getInitialState(): Promise<{
       const msg = await queryCurrentUser();
       return msg.data;
     } catch (error) {
-      history.push(loginPath);
+      // history.push(loginPath);
     }
     return undefined;
   };
@@ -58,8 +63,13 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       content: initialState?.currentUser?.name,
     },
     footerRender: () => <Footer />,
+    // 页面切换触发
     onPageChange: () => {
       const { location } = history;
+      const whiteList = ['/user/register',loginPath];
+      if (whiteList.includes(location.pathname)) {
+        return;
+      }
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);

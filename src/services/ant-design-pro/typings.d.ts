@@ -61,11 +61,19 @@ declare namespace API {
     status?: string;
   };
 
+  // 登录表单参数
   type LoginParams = {
-    username?: string;
-    password?: string;
-    autoLogin?: boolean;
-    type?: string;
+    userAccount?: string;
+    userPassword?: string;
+    type?:string;
+  };
+
+  // 注册表单参数
+  type RegisterParams = {
+    userAccount?: string;
+    userPassword?: string;
+    checkPassword?:string;
+    type?:string;
   };
 
   type ErrorResponse = {
