@@ -3,31 +3,26 @@
 
 declare namespace API {
   type CurrentUser = {
-    name?: string;
-    avatar?: string;
-    userid?: string;
+    id?: number;
     email?: string;
-    signature?: string;
-    title?: string;
-    group?: string;
-    tags?: { key?: string; label?: string }[];
-    notifyCount?: number;
-    unreadCount?: number;
-    country?: string;
-    access?: string;
-    geographic?: {
-      province?: { label?: string; key?: string };
-      city?: { label?: string; key?: string };
-    };
-    address?: string;
     phone?: string;
+    username?: string;
+    userAccount?: string;
+    userState?: number;
+    userRole?: number;
+    avatarUrl?: string;
+    gender?: number;
+    createTime?: Date;
   };
 
+  // 返回结果
   type LoginResult = {
     status?: string;
     type?: string;
     currentAuthority?: string;
   };
+
+  type RegisterResult = number;
 
   type PageParams = {
     current?: number;
@@ -65,15 +60,15 @@ declare namespace API {
   type LoginParams = {
     userAccount?: string;
     userPassword?: string;
-    type?:string;
+    type?: string;
   };
 
   // 注册表单参数
   type RegisterParams = {
     userAccount?: string;
     userPassword?: string;
-    checkPassword?:string;
-    type?:string;
+    checkPassword?: string;
+    type?: string;
   };
 
   type ErrorResponse = {

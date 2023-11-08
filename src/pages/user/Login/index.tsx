@@ -1,18 +1,12 @@
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
-import {
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
 import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { history, useModel } from 'umi';
 import styles from './index.less';
+
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => (
@@ -25,6 +19,7 @@ const LoginMessage: React.FC<{
     showIcon
   />
 );
+
 const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
@@ -135,8 +130,11 @@ const Login: React.FC = () => {
               style={{
                 float: 'right',
               }}
+              onClick={() => {
+                history.push('/user/register');
+              }}
             >
-              忘记密码 ?
+              没有账号 ? 点击注册
             </a>
           </div>
         </LoginForm>
