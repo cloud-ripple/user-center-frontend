@@ -12,17 +12,24 @@ declare namespace API {
     userRole?: number;
     avatarUrl?: string;
     gender?: number;
+    planetCode?:string;
     createTime?: Date;
   };
 
   // 返回结果
   type LoginResult = {
-    status?: string;
-    type?: string;
-    currentAuthority?: string;
+    code?: number;
+    data?: object;
+    message?: string;
+    description?: string;
   };
 
-  type RegisterResult = number;
+  type RegisterResult = {
+    code?: number;
+    data?: object;
+    message?: string;
+    description?: string;
+  };
 
   type PageParams = {
     current?: number;
@@ -68,6 +75,7 @@ declare namespace API {
     userAccount?: string;
     userPassword?: string;
     checkPassword?: string;
+    planetCode?:string;
     type?: string;
   };
 
